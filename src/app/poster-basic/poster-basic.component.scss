@@ -2,16 +2,8 @@
   transition: transform 0.2s ease, border 0.2s ease;
   cursor: pointer;
   color: #777;
-  width: 6rem;
 }
 
 .card:hover {
   transform: scale(1.05);
-}
-
-@media (min-width: 576px) {
-  .card {
-    width: 12rem;
-  }
-
 }
