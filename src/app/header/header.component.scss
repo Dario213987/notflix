@@ -1,0 +1,19 @@
+header {
+  background: linear-gradient(to bottom, #000 0%, #3330 100%);
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 992px) {
+  .tabs-md-centered {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+
+
+
+
+

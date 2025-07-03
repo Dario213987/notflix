@@ -1,0 +1,68 @@
+$primary-color: white;
+$secondary-color: black;
+$tab-width: 7.2rem;
+$tab-height: 1.44rem;
+
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+.container{
+  display: inline-block;
+  max-width: max-content;
+  max-height: max-content;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.08);
+}
+
+.tabs {
+  color: $primary-color;
+  background-color: #000;
+
+}
+
+input[type=radio] {
+  display: none;
+}
+
+.tab {
+  height: $tab-height;
+  width: $tab-width;
+  transition: color 0.15s ease-in;
+  cursor: pointer;
+}
+
+input[type=radio]:checked+label {
+  color: $secondary-color;
+}
+input[id=radio-1]:checked~.glider {
+  transform: translateX(0);
+}
+
+input[id=radio-2]:checked~.glider {
+  transform: translateX(100%);
+}
+
+input[id=radio-3]:checked~.glider {
+  transform: translateX(200%);
+}
+
+.glider {
+  height: $tab-height;
+  width: $tab-width;
+  background-color: $primary-color;
+  transition: 0.25s ease-out;
+}
+
+@media (min-width: 576px) {
+  .glider {
+    height: $tab-height * 1.25;
+    width: $tab-width  * 1.25;
+  }
+
+  .tab {
+    height: $tab-height * 1.25;
+    width: $tab-width  * 1.25;
+  }
+}
