@@ -1,13 +1,20 @@
 <div class="card border-0 bg-transparent poster">
   <div class="position-relative m-0" style="padding-top: 150%; overflow: hidden;">
-    <img src="/posters/a-minecraft-movie-67c99b0a112b7.jpg"
+    @if (loading) {
+      <div class="loading-gradient rounded-2 z-2 img"></div>
+    }
+    <img [src]="'/movie-images/'+pelicula.jellyfinId+'_Primary.jpg'"
          class="position-absolute top-0 start-0 w-100 h-100 rounded-2"
          style="object-fit: cover;"
-         alt="Poster de la película">
+         alt="Poster de la película"
+         (load)="onLoad()"      (error)="onError()">
   </div>
-  <div class="card-body px-0 mx-0">
-    <p class="card-title text-truncate text-center">
-      A Minecraft Movieaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  <div class="card-body p-0 m-0 pt-2 position-relative">
+    @if (loading){
+      <div class="loading-gradient text rounded-2" *ngIf="loading"></div>
+    }
+    <p class="card-title text-truncate text-center mx-2">
+      {{ pelicula.name }}
     </p>
   </div>
 </div>

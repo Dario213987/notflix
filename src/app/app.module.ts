@@ -8,6 +8,8 @@ import { HeaderComponent } from './header/header.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MainComponent } from './main/main.component';
 import { PosterBasicComponent } from './poster-basic/poster-basic.component';
+import {NgOptimizedImage} from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { PosterBasicComponent } from './poster-basic/poster-basic.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    NgOptimizedImage,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
