@@ -1,11 +1,11 @@
-export interface Pelicula {
+export interface MediaItem {
   id: number;
   name: string;
   originalTitle: string | null;
-  jellyfinId: string;
+  imageId: string;
   premiereDate: string | null;
   overview: string | null;
   communityRating: number | null;
-  tunTimeTicks: number | null;
+  runTimeTicks: number | null;
   productionYear: number | null;
 }

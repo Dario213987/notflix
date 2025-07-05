@@ -1,10 +1,10 @@
   <div class="container tabs d-flex align-items-center position-relative p-2 rounded-pill f">
-    <input type="radio" id="radio-1" name="tabs" checked  class="d-none"/>
-    <label class="tab z-2 d-flex justify-content-center align-items-center text-md fw-bold rounded-pill" for="radio-1">Películas</label>
-    <input type="radio" id="radio-2" name="tabs" class="d-none" />
-    <label class="tab z-2 d-flex justify-content-center align-items-center text-md fw-bold rounded-pill" for="radio-2">Series</label>
-    <input type="radio" id="radio-3" name="tabs" class="d-none" />
-    <label class="tab z-2 d-flex justify-content-center align-items-center text-md fw-bold rounded-pill" for="radio-3">Favoritos</label>
+    <input type="radio" id="radio-1" name="tabs" [checked]="selectedTab == 0" class="d-none" />
+    <label class="tab z-2 d-flex justify-content-center align-items-center text-md fw-bold rounded-pill" (click)="goToTab(0)" for="radio-1">Películas</label>
+    <input type="radio" id="radio-2" name="tabs" [checked]="selectedTab == 1" class="d-none" />
+    <label class="tab z-2 d-flex justify-content-center align-items-center text-md fw-bold rounded-pill" (click)="goToTab(1)" for="radio-2">Series</label>
+    <input type="radio" id="radio-3" name="tabs" [checked]="selectedTab == 2" class="d-none" />
+    <label class="tab z-2 d-flex justify-content-center align-items-center text-md fw-bold rounded-pill" (click)="goToTab(2)" for="radio-3">Favoritos</label>
     <span class="glider position-absolute rounded-pill z-1"></span>
   </div>
 

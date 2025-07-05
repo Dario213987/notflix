@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
-import { Pelicula } from '../models/Pelicula';
+import { MediaItem } from '../models/MediaItem';
+import {environment} from '../../environments/environment';
 @Component({
   selector: 'app-poster-basic',
   standalone: false,
@@ -8,11 +9,13 @@ import { Pelicula } from '../models/Pelicula';
 })
 export class PosterBasicComponent {
   loading: boolean = true;
-  @Input() pelicula!: Pelicula;
+  @Input() item!: MediaItem;
 
   onLoad(){
-    this.loading = false;
-  }
+    setTimeout(() => {
+      this.loading = false;
+    }, environment.minimumSkeletonAnimationTime);
+    }
 
   onError(){
     //TODO: poner imagen de error

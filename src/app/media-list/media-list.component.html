@@ -1,0 +1,5 @@
+<div class="row row-cols-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6 g-3">
+  @for (item of items; track item.id) {
+    <app-poster-basic class="col" [item]="item"></app-poster-basic>
+  }
+</div>
