@@ -3,7 +3,7 @@
     @if (loading) {
       <div class="loading-gradient rounded-2 z-2 img"></div>
     }
-    <img [src]="'/movie-images/'+pelicula.jellyfinId+'_Primary.jpg'"
+    <img [src]="'/movie-images/'+item.imageId+'_Primary.jpg'"
          class="position-absolute top-0 start-0 w-100 h-100 rounded-2"
          style="object-fit: cover;"
          alt="Poster de la película"
@@ -14,7 +14,7 @@
       <div class="loading-gradient text rounded-2" *ngIf="loading"></div>
     }
     <p class="card-title text-truncate text-center mx-2">
-      {{ pelicula.name }}
+      {{ item.name }}
     </p>
   </div>
 </div>

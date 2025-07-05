@@ -1,8 +1,6 @@
-<main class="container-fluid px-3 justify-content-center d-flex">
-  <div class="middle row row-cols-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6 g-3">
-    @for (pelicula of peliculas; track pelicula.id) {
-      <app-poster-basic class="col" [pelicula]="pelicula"></app-poster-basic>
-    }
-  </div>
+<main class="container-fluid d-flex justify-content-center">
+    <div class="middle">
+      <router-outlet></router-outlet>
+    </div>
 </main>
 
