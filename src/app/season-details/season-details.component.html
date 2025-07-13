@@ -22,7 +22,7 @@
           <div class="d-flex">
 
             @if(item.communityRating){
-              <div class="d-flex justify-content-center p-1">
+              <div class="d-flex justify-content-center p-1 me-4">
                 <fa-icon [icon]="faStar" class="text-warning fa-1x"></fa-icon>
                 <p class="ms-2">
                   {{ item.communityRating | number:'1.1-1' }}
@@ -30,7 +30,7 @@
               </div>
             }
 
-            <p class="ms-4 p-1 rounded-3 bg-light-transparent">
+            <p class="p-1 rounded-3 bg-light-transparent">
               {{item.productionYear}}
             </p>
 
