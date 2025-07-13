@@ -8,5 +8,5 @@ import {MediaItem} from '../models/MediaItem';
   styleUrl: './media-list.component.scss'
 })
 export class MediaListComponent {
-  @Input() items: MediaItem[] = []!;
+  @Input() items: MediaItem[] = [];
 }

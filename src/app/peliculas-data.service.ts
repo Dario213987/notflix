@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MediaItem } from './models/MediaItem';
+import { Movie } from './models/Movie';
 import {HttpClient} from '@angular/common/http';
 import { environment } from '../environments/environment';
 import {BehaviorSubject, map, Observable, of} from 'rxjs';
@@ -8,7 +8,7 @@ import {BehaviorSubject, map, Observable, of} from 'rxjs';
 })
 export class PeliculasDataService {
 
-  private peliculasListSubject = new BehaviorSubject<MediaItem[]>([]);
+  private peliculasListSubject = new BehaviorSubject<Movie[]>([]);
 
   peliculasList$ = this.peliculasListSubject.asObservable();
 
@@ -17,9 +17,12 @@ export class PeliculasDataService {
   constructor(private http: HttpClient) { }
 
   nextPage(): void{
-    this.http.get<MediaItem[]>(`${environment.mockApiBaseUrl}/peliculas?p=${this.pageNumber}&l=${environment.defaultPageSize}`)
+    this.http.get<Movie[]>(`${environment.mockApiBaseUrl}/peliculas?_page=${this.pageNumber}&_limit=${environment.defaultPageSize}`)
+      .pipe(
+        map(movieArray => movieArray.map(m => this.mapMovie(m))) //Benditos sean los pipes
+      )
       .subscribe(peliculas => {
-          const ls: MediaItem[] = this.peliculasListSubject.getValue();
+          const ls: Movie[] = this.peliculasListSubject.getValue();
           this.peliculasListSubject.next([...ls, ...peliculas]);
           this.pageNumber++;
       });
@@ -31,15 +34,23 @@ export class PeliculasDataService {
     }
   }
 
-  getById(id: number): Observable<MediaItem> {
-    const pelicula:MediaItem|undefined = this.peliculasListSubject.getValue().find(s => s.id == id);
+  getById(id: number): Observable<Movie> {
+    const pelicula:Movie|undefined = this.peliculasListSubject.getValue().find(s => s.id == id);
 
     if (pelicula) {
       return of(pelicula);
     }
 
-    return this.http.get<MediaItem[]>(`${environment.mockApiBaseUrl}/peliculas?id=${id}`).pipe(
+    return this.http.get<Movie[]>(`${environment.mockApiBaseUrl}/peliculas?id=${id}`).pipe(
       map(items => items[0])
     );
+  }
+
+
+  private mapMovie(m: Movie): Movie {
+    return {
+      ...m,
+      route: ['/','peliculas', m.id.toString()]
+    };
   }
 }

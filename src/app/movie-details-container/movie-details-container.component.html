@@ -1,0 +1,17 @@
+@if (pelicula$ | async; as item) {
+  <div class="position-fixed top-0 start-0 w-100 h-100 z-n1 fondo" [ngStyle]="{ 'background-image': 'url(/media-images/' + item.imageTag + '_Backdrop.jpg)' }"></div>
+
+  <div class="d-flex flex-column m-0 p-0 h-100">
+    <div class="logo-container d-flex justify-content-center align-items-center p-2">
+      <img
+        [src]="'/media-images/' + item.imageTag + '_Logo.jpg'"
+        class="logo"
+        alt="Logo de la película"
+
+      >
+    </div>
+
+    <router-outlet></router-outlet>
+
+  </div>
+}

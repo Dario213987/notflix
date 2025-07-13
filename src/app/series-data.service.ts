@@ -3,6 +3,8 @@ import {HttpClient} from '@angular/common/http';
 import { environment } from '../environments/environment';
 import {BehaviorSubject, map, Observable, of} from 'rxjs';
 import {Serie} from './models/Serie';
+import {Season} from './models/Season';
+import {Episode} from './models/Episode';
 @Injectable({
   providedIn: 'root'
 })
@@ -18,10 +20,13 @@ export class SeriesDataService {
   }
 
   nextPage(): void {
-    this.http.get<Serie[]>(`${environment.mockApiBaseUrl}/series?p=${this.pageNumber}&l=${environment.defaultPageSize}`)
-      .subscribe(peliculas => {
-        const ls: Serie[] = this.seriesListSubject.getValue();
-        this.seriesListSubject.next([...ls, ...peliculas]);
+    this.http.get<Serie[]>(`${environment.mockApiBaseUrl}/series?_page=${this.pageNumber}&_limit=${environment.defaultPageSize}`)
+      .pipe(
+        map(seriesArray => seriesArray.map(s => this.mapSerie(s))) //Benditos sean los pipes
+      )
+      .subscribe(mappedSeries => {
+        const ls:Serie[] = this.seriesListSubject.getValue();
+        this.seriesListSubject.next([...ls, ...mappedSeries]);
         this.pageNumber++;
       });
   }
@@ -42,6 +47,29 @@ export class SeriesDataService {
     return this.http.get<Serie[]>(`${environment.mockApiBaseUrl}/series?id=${id}`).pipe(
       map(items => items[0])
     );
+  }
+
+  private mapSerie(s: Serie): Serie {
+    return {
+      ...s,
+      route: ['/','series', s.id.toString()],
+      seasons: s.seasons.map(season => this.mapSeason(season, s.id))
+    };
+  }
+
+  private mapSeason(s: Season, serieId: number): Season {
+    return {
+      ...s,
+      route: ['/','series', serieId.toString(), 'temporada', s.id.toString()],
+      episodes: s.episodes.map(e => this.mapEpisode(e, serieId, s.id))
+    };
+  }
+
+  private mapEpisode(e: Episode, serieId: number, seasonId: number): Episode {
+    return {
+      ...e,
+      route: ['/','series', serieId.toString(), 'temporada', seasonId.toString(), 'episodio', e.id.toString()],
+    };
   }
 
 }

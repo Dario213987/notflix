@@ -14,4 +14,9 @@ export class SeriesListComponent {
   ngOnInit() {
     this.seriesDataService.initialize();
   }
+
+
+  nextPage() {
+    this.seriesDataService.nextPage();
+  }
 }

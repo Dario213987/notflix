@@ -1,0 +1,49 @@
+@use '../../bootstrap-variables' as *;
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+
+.container-fluid{
+  min-height: 100%;
+}
+.fondo {
+  background-size: cover;
+  background-position: center;
+  transition: background-image 0.5s ease-in-out;
+  filter: brightness(0.5);
+}
+
+.logo-container {
+  min-height: 40vh;
+}
+
+.logo {
+  max-width: 50%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+@media (min-width: $md) {
+  .logo {
+    max-width: 20%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+}
+
+@media (min-width: $lg) {
+  .logo-container {
+    min-height: 60vh;
+  }
+
+  .logo {
+    max-width: 20%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+}
+
+

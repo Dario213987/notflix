@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {BehaviorSubject, forkJoin, map, Observable, of, switchMap} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../environments/environment';
-import {MediaItem} from './models/MediaItem';
+import {Movie} from './models/Movie';
 import {Favorito} from './models/Favorito';
 
 @Injectable({
@@ -19,7 +19,7 @@ export class FavoritosDataService {
   }
 
   nextPage(): void {
-    this.http.get<Favorito[]>(`${environment.mockApiBaseUrl}/favoritos?p=${this.pageNumber}&l=${environment.defaultPageSize}`)
+    this.http.get<Favorito[]>(`${environment.mockApiBaseUrl}/favoritos?_page=${this.pageNumber}&_limit=${environment.defaultPageSize}`)
       .pipe(
         switchMap(favoritos => {
           if (!favoritos.length) return of([]);
@@ -29,7 +29,7 @@ export class FavoritosDataService {
               ? `${environment.mockApiBaseUrl}/peliculas?id=${fav.mediaId}`
               : `${environment.mockApiBaseUrl}/series?id=${fav.mediaId}`;
 
-            return this.http.get<MediaItem[]>(url).pipe(
+            return this.http.get<Movie[]>(url).pipe(
               map(items => {
                 fav.mediaItem = items[0];
                 return fav;

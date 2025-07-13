@@ -1,1 +1,6 @@
-<app-media-list [items]="( favoritosMediaItems$ | async)!"></app-media-list>
+<app-media-list class="container-fluid middle d-flex" [items]="( favoritosMediaItems$ | async)!"
+                infiniteScroll
+                [infiniteScrollDistance]="2"
+                [infiniteScrollThrottle]="150"
+                (scrolled)="nextPage()"
+></app-media-list>

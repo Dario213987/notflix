@@ -1,1 +1,7 @@
-<app-media-list [items]="(peliculasDataService.peliculasList$ | async)!"></app-media-list>
+<app-media-list class="container-fluid middle d-flex" [items]="(peliculasDataService.peliculasList$ | async)!"
+                infiniteScroll
+                [infiniteScrollDistance]="2"
+                [infiniteScrollThrottle]="150"
+                (scrolled)="nextPage()"
+></app-media-list>
+

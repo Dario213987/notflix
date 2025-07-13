@@ -23,4 +23,9 @@ export class FavoriteListComponent {
   ngOnInit() {
     this.favoritosDataService.initialize();
   }
+
+
+  nextPage() {
+    this.favoritosDataService.nextPage();
+  }
 }

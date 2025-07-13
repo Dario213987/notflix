@@ -1,3 +1,5 @@
+@use '../../bootstrap-variables' as *;
+
 $primary-color: white;
 $secondary-color: black;
 $tab-width: 7.2rem;
@@ -55,7 +57,7 @@ input[id=radio-3]:checked~.glider {
   transition: 0.25s ease-out;
 }
 
-@media (min-width: 576px) {
+@media (min-width: $sm) {
   .glider {
     height: $tab-height * 1.25;
     width: $tab-width  * 1.25;

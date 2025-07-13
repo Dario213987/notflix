@@ -1,5 +1,6 @@
-export interface Episode {
-  name: string,
-  imageId: string,
-  indexNumber: number
+import {MediaItem} from './MediaItem';
+
+export interface Episode extends MediaItem {
+  episodeNumber: number,
+  runtimeTicks: number,
 }

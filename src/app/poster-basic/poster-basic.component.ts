@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
-import { MediaItem } from '../models/MediaItem';
 import {environment} from '../../environments/environment';
+import {MediaItem} from '../models/MediaItem';
 @Component({
   selector: 'app-poster-basic',
   standalone: false,

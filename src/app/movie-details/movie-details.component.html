@@ -1,0 +1,65 @@
+@if (pelicula$ | async; as item) {
+  <div class="content-container container-fluid pt-5 overflow-visible d-flex flex-column h-100">
+
+    <div class="row row-cols-2 row-cols-md-3 g-0">
+
+      <div class="col d-flex justify-content-center">
+        <img
+          [src]="'/media-images/' + item.imageTag + '_Primary.jpg'"
+          class="img-fluid rounded-3 poster shadow-lg"
+          alt="Póster de la película"
+
+        />
+      </div>
+
+      <div class="col d-flex flex-column">
+
+        <h2>{{ item.name }}</h2>
+
+        @if (item.name !== item.originalTitle){
+          <h5 class="">{{ item.originalTitle }}</h5>
+        }
+
+        <div class="d-flex">
+
+          @if(item.communityRating){
+            <div class="d-flex justify-content-center p-1">
+              <fa-icon [icon]="faStar" class="text-warning fa-1x"></fa-icon>
+              <p class="ms-2">
+                {{ item.communityRating | number:'1.1-1' }}
+              </p>
+            </div>
+          }
+
+          <p class="ms-4 p-1 rounded-3 bg-light-transparent">
+            {{item.productionYear}}
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="col-12 d-flex pt-md-3 p-0">
+
+        <div class="d-flex justify-content-md-end justify-content-center pt-2 pt-md-0 pe-md-5 flex-grow-1">
+          <fa-icon [icon]="faHeart" class="mx-3 fa-2x"></fa-icon>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="row mt-3 offset-md-4">
+
+      <div class="col-12 col-md-8">
+        <div class="mx-4 m-md-0 p-md-0">
+          {{ item.overview }}
+        </div>
+      </div>
+
+      <div class="col-1 col-md-2"></div>
+
+    </div>
+
+  </div>
+}

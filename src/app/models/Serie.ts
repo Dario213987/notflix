@@ -1,6 +1,6 @@
-import {MediaItem} from './MediaItem';
 import {Season} from './Season';
+import {MediaItem} from './MediaItem';
 
 export interface Serie extends MediaItem{
-  seasons: Season[]
+  seasons: Season[];
 }

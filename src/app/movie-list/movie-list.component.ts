@@ -15,4 +15,8 @@ export class MovieListComponent {
   ngOnInit() {
     this.peliculasDataService.initialize();
   }
+
+  nextPage() {
+    this.peliculasDataService.nextPage();
+  }
 }
