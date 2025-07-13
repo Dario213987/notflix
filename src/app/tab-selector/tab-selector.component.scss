@@ -5,13 +5,11 @@ $secondary-color: black;
 $tab-width: 7.2rem;
 $tab-height: 1.44rem;
 
-*,
-*:after,
-*:before {
+*, *::before, *::after {
   box-sizing: border-box;
 }
 
-.container{
+.container {
   display: inline-block;
   max-width: max-content;
   max-height: max-content;
@@ -21,10 +19,9 @@ $tab-height: 1.44rem;
 .tabs {
   color: $primary-color;
   background-color: #000;
-
 }
 
-input[type=radio] {
+input[type="radio"] {
   display: none;
 }
 
@@ -35,18 +32,19 @@ input[type=radio] {
   cursor: pointer;
 }
 
-input[type=radio]:checked+label {
+input[type="radio"]:checked + label {
   color: $secondary-color;
 }
-input[id=radio-1]:checked~.glider {
+
+input[id="radio-1"]:checked ~ .glider {
   transform: translateX(0);
 }
 
-input[id=radio-2]:checked~.glider {
+input[id="radio-2"]:checked ~ .glider {
   transform: translateX(100%);
 }
 
-input[id=radio-3]:checked~.glider {
+input[id="radio-3"]:checked ~ .glider {
   transform: translateX(200%);
 }
 
@@ -58,13 +56,9 @@ input[id=radio-3]:checked~.glider {
 }
 
 @media (min-width: $sm) {
-  .glider {
-    height: $tab-height * 1.25;
-    width: $tab-width  * 1.25;
-  }
-
+  .glider,
   .tab {
     height: $tab-height * 1.25;
-    width: $tab-width  * 1.25;
+    width: $tab-width * 1.25;
   }
 }

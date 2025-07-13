@@ -12,10 +12,12 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class MovieDetailsContainerComponent {
   pelicula$: Observable<Movie>;
+  imageLoaded: boolean = true;
 
   constructor(private peliculasDataService: PeliculasDataService,
               private route: ActivatedRoute) {
     const id = Number(this.route.snapshot.paramMap.get("id"));
     this.pelicula$ = this.peliculasDataService.getById(id);
   }
+
 }

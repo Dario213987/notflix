@@ -3,12 +3,14 @@
 
   <div class="d-flex flex-column m-0 p-0 h-100">
     <div class="logo-container d-flex justify-content-center align-items-center p-2">
-      <img
-        [src]="'/media-images/' + item.imageTag + '_Logo.jpg'"
-        class="logo"
-        alt="Logo de la película"
-
-      >
+      @if(imageLoaded){
+        <img
+          [src]="'/media-images/' + item.imageTag + '_Logo.jpg'"
+          class="logo"
+          alt="Logo de la película"
+          (error)="imageLoaded=false"
+        >
+      }
     </div>
 
     <router-outlet></router-outlet>
