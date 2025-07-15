@@ -1,59 +1,45 @@
-# Notflix
+# NOTFLIX - Proyecto Angular Seminario 2025
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.10.
+## Tema
+Aplicación web estilo Netflix que permite a los usuarios explorar series y películas, y gestionar una lista de favoritos. Cada favorito puede tener una puntuación y una reseña personal, tanto para series como para películas. La interfaz mantiene un diseño visual inspirado en Netflix para una experiencia familiar y atractiva.
 
-## Development server
+---
 
-To start a local development server, run:
+## Datos del Estudiante
+- **Nombre y Apellido:** Darío José Carsaniga
+- **DNI:** 43.798.858
+- **Email:** piexa.vu4r7@aleeas.com
+- **Sede:** Rauch
 
-```bash
-ng serve
-```
+---
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Librerías adicionales utilizadas
+- Font Awesome (Iconos)
+- Bootstrap (Estilos y diseño responsivo)
+- ngx-infinite-scroll (Scroll infinito para listas de contenido)
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Capturas
 
-```bash
-ng generate component component-name
-```
+![Pantalla principal](screenshots/1.png)  
+*Pantalla principal mostrando películas*
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+![Detalle_de_pelicula](screenshots/2.png)  
+*Pantalla de detalle de la película*
 
-```bash
-ng generate --help
-```
+![Detalle_de_serie](screenshots/3.png)  
+*Pantalla de detalle de la serie*
 
-## Building
+![Detalle_de_temporada](screenshots/4.png)  
+*Pantalla de detalle de la temporada*
 
-To build the project run:
+![Lista_favoritos](screenshots/5.png)  
+*Lista de favoritos*
 
-```bash
-ng build
-```
+![Formulario_favorito](screenshots/6.png)  
+*Formulario PopUp para añadir favoritos*
+---
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Proyecto en StackBlitz
+[Ver proyecto en StackBlitz](PENDIENTE)

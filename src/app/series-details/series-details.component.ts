@@ -29,7 +29,7 @@ export class SeriesDetailsComponent {
 
     this.favorito$ = this.favoritosDataService.favoritosList$.pipe(
       switchMap(() => this.serie$.pipe(
-        switchMap(pelicula => this.favoritosDataService.getByMediaIdAndMediaType(pelicula.id, 'película'))
+        switchMap(serie => this.favoritosDataService.getByMediaIdAndMediaType(serie.id, 'serie'))
       ))
     );
   }
@@ -39,7 +39,7 @@ export class SeriesDetailsComponent {
     this.serie$.pipe(
       map(serie => ({
         mediaId: serie.id,
-        mediaType: 'película' as 'película',
+        mediaType: 'serie' as 'serie',
         ...data,
       }))
     ).subscribe(nuevoFavorito => {
