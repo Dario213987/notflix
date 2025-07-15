@@ -39,7 +39,8 @@ Aplicación web estilo Netflix que permite a los usuarios explorar series y pel�
 
 ![Formulario_favorito](screenshots/6.png)  
 *Formulario PopUp para añadir favoritos*
+
 ---
 
 ## Proyecto en StackBlitz
-[Ver proyecto en StackBlitz](PENDIENTE)
+[Ver proyecto en StackBlitz](https://stackblitz.com/github/Dario213987/notflix)
