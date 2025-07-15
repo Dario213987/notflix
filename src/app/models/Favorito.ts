@@ -3,9 +3,9 @@ import {Serie} from './Serie';
 
 export interface Favorito {
   id: number,
-  mediaId: string,
+  mediaId: number,
   rating: number,
-  mediaType: "pelicula" | "serie",
+  mediaType: "película" | "serie",
   review: string,
   mediaItem?: Serie | Movie,
 }

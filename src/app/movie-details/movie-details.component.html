@@ -6,7 +6,7 @@
       <div class="col d-flex justify-content-center">
         <img
           [src]="'/media-images/' + item.imageTag + '_Primary.jpg'"
-          class="img-fluid rounded-3 poster shadow-lg"
+          class="poster shadow-lg"
           alt="Póster de la película"
         />
       </div>
@@ -41,7 +41,12 @@
       <div class="col-12 d-flex pt-md-3 p-0">
 
         <div class="d-flex justify-content-md-end justify-content-center pt-2 pt-md-0 pe-md-5 flex-grow-1">
-          <fa-icon [icon]="faHeart" class="mx-3 fa-2x"></fa-icon>
+          <fa-icon
+            [icon]="faHeart"
+            class="mx-3 fa-2x"
+            [ngClass]=" (favorito$ | async) ? 'text-danger' : ''" style="cursor: pointer"
+            (click)="showPopUp()"
+          ></fa-icon>
         </div>
 
       </div>
@@ -56,9 +61,32 @@
         </div>
       </div>
 
-      <div class="col-1 col-md-2"></div>
+      @if (favorito$ | async; as favorito) {
+        @if (favorito.rating && favorito.review) {
+
+          <div class="col-12 col-md-8 pb-3">
+            <div class="review-box mt-4 p-3 rounded-3">
+              <h6 class="text-white-50 mb-2">Tu reseña</h6>
+              <p class="mb-1 text-white">
+                <strong>Puntuación:</strong>
+                <fa-icon [icon]="faStar" class="text-warning ps-2"></fa-icon>
+                {{ favorito.rating }}
+              </p>
+              <p class="mb-0 text-white text-wrap white-space-pre-line"><strong>Reseña:</strong> <br> {{ favorito.review }}</p>
+            </div>
+          </div>
+        }
+      }
 
     </div>
 
   </div>
+
+  @if(mostrarPopup){
+    <app-popup-container (cerrar)="mostrarPopup = false">
+      <app-favorite-form (submitForm)="favoriteStore($event)"></app-favorite-form>
+    </app-popup-container>
+  }
+
+
 }

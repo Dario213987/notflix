@@ -25,3 +25,40 @@ body > app-root {
     max-width: 60%;
   }
 }
+
+
+// Estilos para forms
+
+input.form-control:focus,
+textarea.form-control:focus {
+  box-shadow: 0 0 0 0.1rem rgba(255, 255, 255, 0.7);
+  border: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+input.form-control,
+textarea.form-control {
+  background-color: #1e1e1e;
+  color: #fff !important;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+}
+
+input.form-control::placeholder,
+textarea.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+input.form-control:focus,
+textarea.form-control:focus {
+  background-color: #1e1e1e;
+}

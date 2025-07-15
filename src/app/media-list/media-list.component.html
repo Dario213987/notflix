@@ -1,5 +1,10 @@
 <div class="container-fluid row row-cols-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6 gx-3 gy-1">
   @for (item of items; track item.id) {
     <app-poster-basic class="col" [item]="item"></app-poster-basic>
+  } @empty {
+    <div class="col-12 w-100 text-center p-5 fw-bold">
+      <p>El contenido no está disponible en este momento.</p>
+    </div>
   }
 </div>
+

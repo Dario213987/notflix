@@ -20,6 +20,9 @@ import { SeasonDetailsComponent } from './season-details/season-details.componen
 import { MovieDetailsContainerComponent } from './movie-details-container/movie-details-container.component';
 import { SeriesDetailsContainerComponent } from './series-details-container/series-details-container.component';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
+import { PopupContainerComponent } from './popup-container/popup-container.component';
+import {FavoriteFormComponent} from './favorite-form/favorite-form.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -37,6 +40,8 @@ import {InfiniteScrollModule} from 'ngx-infinite-scroll';
     MovieDetailsComponent,
     MovieDetailsContainerComponent,
     SeriesDetailsContainerComponent,
+    PopupContainerComponent,
+    FavoriteFormComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +51,7 @@ import {InfiniteScrollModule} from 'ngx-infinite-scroll';
     HttpClientModule,
     FontAwesomeModule,
     InfiniteScrollModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

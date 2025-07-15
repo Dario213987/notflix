@@ -1,15 +1,11 @@
 @use '../../bootstrap-variables' as *;
 
-.container-fluid.content-container {
-  flex-grow: 1;
+:host {
+  display: block;
   height: 100%;
 }
 
 .content-container {
-  flex-grow: 1;
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
   background: linear-gradient(
       to bottom,
       rgba(0, 0, 0, 0) 0,
@@ -17,15 +13,10 @@
   );
 }
 
-.logo {
-  max-width: 50%;
-  max-height: 100%;
-  object-fit: contain;
-}
-
 .poster {
   width: 40vw;
   margin-top: -80%;
+  object-fit: contain;
 
   @media (min-width: $md) {
     width: 25vw;
@@ -36,6 +27,19 @@
     width: 20vw;
     margin-top: -80%;
   }
+}
+
+.review-box {
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.95rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+
+.white-space-pre-line {
+  white-space: pre-line !important;
 }
 
 .bg-light-transparent {

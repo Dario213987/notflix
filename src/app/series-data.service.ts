@@ -38,14 +38,14 @@ export class SeriesDataService {
   }
 
   getById(id: number): Observable<Serie> {
-    const serie = this.seriesListSubject.getValue().find(s => s.id == id);
+    const serie:Serie|undefined = this.seriesListSubject.getValue().find(s => s.id == id);
 
     if (serie) {
       return of(serie);
     }
 
     return this.http.get<Serie[]>(`${environment.mockApiBaseUrl}/series?id=${id}`).pipe(
-      map(items => items[0])
+      map(items => this.mapSerie(items[0]))
     );
   }
 

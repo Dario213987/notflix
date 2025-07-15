@@ -16,6 +16,7 @@
 .poster {
   width: 40vw;
   margin-top: -80%;
+  object-fit: contain;
 
   @media (min-width: $md) {
     width: 25vw;
@@ -26,6 +27,19 @@
     width: 20vw;
     margin-top: -80%;
   }
+}
+
+.review-box {
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.95rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+
+.white-space-pre-line {
+  white-space: pre-line !important;
 }
 
 .bg-light-transparent {

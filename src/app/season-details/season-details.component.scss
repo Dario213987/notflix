@@ -14,6 +14,7 @@
 .poster {
   width: 40vw;
   margin-top: -80%;
+  object-fit: contain;
 
   @media (min-width: $md) {
     width: 25vw;
