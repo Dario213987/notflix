@@ -1,0 +1,30 @@
+@use '../../bootstrap-variables' as *;
+
+.popup-window{
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0,0,0, 0.7 );
+  box-shadow: 0 0 3px gray;
+  backdrop-filter: blur(6px)
+}
+
+.back-arrow {
+  color: white;
+  font-size: 1.25rem;
+  margin-right: 0.5rem;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: #ff4444;
+  }
+}
+
+.middle {
+  height: 100%;
+  min-width: 100%;
+  @media (min-width: $lg) {
+    height: auto;
+    min-width: 40%;
+  }
+}
+
+
