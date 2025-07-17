@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  mockApiBaseUrl: 'https://68674d1ae3fefb261ede38f9.mockapi.io',
-  defaultPageSize: 1000,
+  mockApiBaseUrl: 'https://mock-api.alambrito.com.ar',
+  defaultPageSize: 36,
   minimumSkeletonAnimationTime: 200
 };
