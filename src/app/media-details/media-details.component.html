@@ -28,12 +28,13 @@
             </p>
           </div>
         }
-
-        <p class="ms-4 p-1 rounded-3 bg-light-transparent">
-          {{item.productionYear}}
-        </p>
+        <div>
+          <p class="ms-2 ms-md-4 p-1 rounded-3 bg-light-transparent ">
+            {{item.productionYear}}
+          </p>
+        </div>
         @if (isMovie(item)) {
-          <p class="ms-2 p-1">
+          <p class="ms-1 p-1 ms-md-2">
             {{item.runTimeTicks | ticksToTime}}
           </p>
         }
