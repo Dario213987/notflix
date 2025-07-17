@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Movie } from './models/Movie';
 import {HttpClient} from '@angular/common/http';
 import { environment } from '../environments/environment';
-import {BehaviorSubject, map, Observable, of} from 'rxjs';
+import {BehaviorSubject, map, Observable, of, tap} from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -19,30 +19,35 @@ export class PeliculasDataService {
   nextPage(): void{
     this.http.get<Movie[]>(`${environment.mockApiBaseUrl}/peliculas?_page=${this.pageNumber}&_limit=${environment.defaultPageSize}`)
       .pipe(
-        map(movieArray => movieArray.map(m => this.mapMovie(m))) //Benditos sean los pipes
+        map(movieArray => movieArray.map(m => this.mapMovie(m)))
       )
       .subscribe(peliculas => {
           const ls: Movie[] = this.peliculasListSubject.getValue();
-          this.peliculasListSubject.next([...ls, ...peliculas]);
+          const nuevos = peliculas.filter(movieOld => !ls.some(movieNew => movieOld.id == movieNew.id))
+          this.peliculasListSubject.next([...ls, ...nuevos]);
           this.pageNumber++;
       });
   }
 
   initialize(){
-    if(this.peliculasListSubject.getValue().length == 0){
+    if(this.peliculasListSubject.getValue().length < environment.defaultPageSize){
       this.nextPage();
     }
   }
 
   getById(id: number): Observable<Movie> {
-    const pelicula:Movie|undefined = this.peliculasListSubject.getValue().find(s => s.id == id);
-
-    if (pelicula) {
-      return of(pelicula);
-    }
+    const movie = this.peliculasListSubject.getValue().find(p => p.id === id);
+    if (movie) return of(movie);
 
     return this.http.get<Movie[]>(`${environment.mockApiBaseUrl}/peliculas?id=${id}`).pipe(
-      map(items => this.mapMovie(items[0]))
+      map(items => items[0]),
+      map(item => this.mapMovie(item)),
+      tap(m => {
+        if (m) {
+          const ls = this.peliculasListSubject.getValue();
+          this.peliculasListSubject.next([...ls, m]);
+        }
+      })
     );
   }
 

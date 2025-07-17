@@ -21,9 +21,6 @@ $tab-height: 1.44rem;
   background-color: #000;
 }
 
-input[type="radio"] {
-  display: none;
-}
 
 .tab {
   height: $tab-height;
@@ -32,8 +29,12 @@ input[type="radio"] {
   cursor: pointer;
 }
 
-input[type="radio"]:checked + label {
+input[type="radio"]:checked + a label {
   color: $secondary-color;
+}
+
+input[type="radio"] + a label {
+  color: $primary-color;
 }
 
 input[id="radio-1"]:checked ~ .glider {

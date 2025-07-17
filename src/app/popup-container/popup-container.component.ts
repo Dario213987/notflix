@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -10,6 +10,7 @@ import {faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 export class PopupContainerComponent {
   @Output() cerrar = new EventEmitter<void>();
   faArrowLeft = faArrowLeft;
+  @Input() title!: string;
   cerrarPopup() {
     this.cerrar.emit();
   }

@@ -1,0 +1,5 @@
+@if (pelicula$ | async; as item) {
+  <app-media-details-container [item]="item" [tipo]="'película'">
+    <app-media-details [item]="item" [tipo]="'película'"></app-media-details>
+  </app-media-details-container>
+}

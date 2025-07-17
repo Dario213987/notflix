@@ -3,11 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import {MovieListComponent} from './movie-list/movie-list.component';
 import {SeriesListComponent} from './series-list/series-list.component';
 import {FavoriteListComponent} from './favorite-list/favorite-list.component';
-import {MovieDetailsComponent} from './movie-details/movie-details.component';
-import {SeriesDetailsComponent} from './series-details/series-details.component';
 import {SeasonDetailsComponent} from './season-details/season-details.component';
-import {MovieDetailsContainerComponent} from './movie-details-container/movie-details-container.component';
-import {SeriesDetailsContainerComponent} from './series-details-container/series-details-container.component';
+import {MovieDetailsPageComponent} from './movie-details-page/movie-details-page.component';
+import {SeriesDetailsPageComponent} from './series-details-page/series-details-page.component';
+import {SeriesDetailsComponent} from './series-details/series-details.component';
 
 const routes: Routes = [
   {
@@ -22,22 +21,32 @@ const routes: Routes = [
   },
   {
     path: 'peliculas/:id',
-    component: MovieDetailsContainerComponent,
-    children: [
-      { path: '', component: MovieDetailsComponent },
-    ]
+    component: MovieDetailsPageComponent,
   },
   {
     path: 'series',
     component: SeriesListComponent
   },
   {
+    /* Esta ruta la hice diferente para evitar que el componente que contiene
+     la imagen de fondo de la serie se destruya y se cree nuevamente, lo cual
+      causa que la pantalla titile al ir a un temporada o volver a una serie */
     path: 'series/:id',
-    component: SeriesDetailsContainerComponent,
+    component: SeriesDetailsPageComponent,
     children: [
-      { path: '', component: SeriesDetailsComponent },
-      { path: 'temporada/:seasonId', component: SeasonDetailsComponent },
+      {
+        path: '',
+        component: SeriesDetailsComponent
+      },
+      {
+        path: 'temporada/:seasonId',
+        component: SeasonDetailsComponent
+      }
     ]
+  },
+  {
+    path: 'series/:id/temporada/:seasonId',
+    component: SeasonDetailsComponent
   },
   {
     path: 'favoritos',

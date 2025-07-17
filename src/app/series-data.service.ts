@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { environment } from '../environments/environment';
-import {BehaviorSubject, map, Observable, of} from 'rxjs';
+import {BehaviorSubject, map, Observable, of, tap} from 'rxjs';
 import {Serie} from './models/Serie';
 import {Season} from './models/Season';
 import {Episode} from './models/Episode';
@@ -26,26 +26,31 @@ export class SeriesDataService {
       )
       .subscribe(mappedSeries => {
         const ls:Serie[] = this.seriesListSubject.getValue();
-        this.seriesListSubject.next([...ls, ...mappedSeries]);
+        const nuevos = mappedSeries.filter(serieOld => !ls.some(serieNew => serieOld.id == serieNew.id))
+        this.seriesListSubject.next([...ls, ...nuevos]);
         this.pageNumber++;
       });
   }
 
   initialize():void{
-    if(this.seriesListSubject.getValue().length == 0){
+    if(this.seriesListSubject.getValue().length < environment.defaultPageSize){
       this.nextPage();
     }
   }
 
   getById(id: number): Observable<Serie> {
-    const serie:Serie|undefined = this.seriesListSubject.getValue().find(s => s.id == id);
-
-    if (serie) {
-      return of(serie);
-    }
+    const serie = this.seriesListSubject.getValue().find(p => p.id === id);
+    if (serie) return of(serie);
 
     return this.http.get<Serie[]>(`${environment.mockApiBaseUrl}/series?id=${id}`).pipe(
-      map(items => this.mapSerie(items[0]))
+      map(items => items[0]),
+      map(item => this.mapSerie(item)),
+      tap(s => {
+        if (s) {
+          const ls = this.seriesListSubject.getValue();
+          this.seriesListSubject.next([...ls, s]);
+        }
+      })
     );
   }
 

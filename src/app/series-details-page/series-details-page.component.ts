@@ -5,14 +5,14 @@ import {Serie} from '../models/Serie';
 import {SeriesDataService} from '../series-data.service';
 
 @Component({
-  selector: 'app-series-details-container',
+  selector: 'app-series-details-page',
   standalone: false,
-  templateUrl: './series-details-container.component.html',
-  styleUrl: './series-details-container.component.scss'
+  templateUrl: './series-details-page.component.html',
+  styleUrl: './series-details-page.component.scss'
 })
-export class SeriesDetailsContainerComponent {
+export class SeriesDetailsPageComponent {
 
-  serie$: Observable<Serie>;
+  serie$: Observable<Serie | undefined>;
 
   constructor(private seriesDataService: SeriesDataService,
               private route: ActivatedRoute) {

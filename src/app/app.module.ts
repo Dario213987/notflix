@@ -13,17 +13,18 @@ import { MediaListComponent } from './media-list/media-list.component';
 import { MovieListComponent } from './movie-list/movie-list.component';
 import { SeriesListComponent } from './series-list/series-list.component';
 import { FavoriteListComponent } from './favorite-list/favorite-list.component';
-import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import { SeriesDetailsComponent } from './series-details/series-details.component';
 import { SeasonDetailsComponent } from './season-details/season-details.component';
-import { MovieDetailsContainerComponent } from './movie-details-container/movie-details-container.component';
-import { SeriesDetailsContainerComponent } from './series-details-container/series-details-container.component';
+import { MovieDetailsPageComponent } from './movie-details-page/movie-details-page.component';
+import { SeriesDetailsPageComponent } from './series-details-page/series-details-page.component';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import { PopupContainerComponent } from './popup-container/popup-container.component';
 import {FavoriteFormComponent} from './favorite-form/favorite-form.component';
 import {ReactiveFormsModule} from '@angular/forms';
-
+import { MediaDetailsContainerComponent } from './media-details-container/media-details-container.component';
+import { MediaDetailsComponent } from './media-details/media-details.component';
+import { TicksToTimePipe } from './pipes/ticks-to-time.pipe';
+import { SeriesDetailsComponent } from './series-details/series-details.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,14 +35,15 @@ import {ReactiveFormsModule} from '@angular/forms';
     MovieListComponent,
     SeriesListComponent,
     FavoriteListComponent,
-    MovieDetailsComponent,
-    SeriesDetailsComponent,
     SeasonDetailsComponent,
-    MovieDetailsComponent,
-    MovieDetailsContainerComponent,
-    SeriesDetailsContainerComponent,
+    MovieDetailsPageComponent,
+    SeriesDetailsPageComponent,
     PopupContainerComponent,
-    FavoriteFormComponent
+    FavoriteFormComponent,
+    MediaDetailsContainerComponent,
+    MediaDetailsComponent,
+    TicksToTimePipe,
+    SeriesDetailsComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
-import {Observable} from 'rxjs';
+import { Observable} from 'rxjs';
 import {Movie} from '../models/Movie';
 import {PeliculasDataService} from '../peliculas-data.service';
 import {ActivatedRoute} from '@angular/router';
 
 @Component({
-  selector: 'app-movie-details-container',
+  selector: 'app-movie-details-page',
   standalone: false,
-  templateUrl: './movie-details-container.component.html',
-  styleUrl: './movie-details-container.component.scss'
+  templateUrl: './movie-details-page.component.html',
+  styleUrl: './movie-details-page.component.scss'
 })
-export class MovieDetailsContainerComponent {
-  pelicula$: Observable<Movie>;
+export class MovieDetailsPageComponent {
+  pelicula$: Observable<Movie | undefined>;
   imageLoaded: boolean = true;
 
   constructor(private peliculasDataService: PeliculasDataService,

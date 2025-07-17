@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
-import {map, Observable, switchMap, take} from 'rxjs';
-import {ActivatedRoute} from '@angular/router';
-import { faHeart, faStar } from '@fortawesome/free-solid-svg-icons';
-import {SeriesDataService} from '../series-data.service';
+import {map, Observable} from 'rxjs';
 import {Serie} from '../models/Serie';
-import {Favorito} from '../models/Favorito';
-import {FavoritosDataService} from '../favoritos-data.service';
+import {SeriesDataService} from '../series-data.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-series-details',
@@ -14,48 +11,14 @@ import {FavoritosDataService} from '../favoritos-data.service';
   styleUrl: './series-details.component.scss'
 })
 export class SeriesDetailsComponent {
-  faHeart = faHeart;
-  faStar = faStar;
-  serie$: Observable<Serie>;
-  favorito$: Observable<Favorito | undefined>;
-  mostrarPopup: boolean = false;
-
+  serie$: Observable<Serie | undefined>;
 
   constructor(private seriesDataService: SeriesDataService,
-              private favoritosDataService: FavoritosDataService,
               private route: ActivatedRoute) {
     const id = Number(this.route.snapshot.paramMap.get("id"));
-    this.serie$ = this.seriesDataService.getById(id);
-
-    this.favorito$ = this.favoritosDataService.favoritosList$.pipe(
-      switchMap(() => this.serie$.pipe(
-        switchMap(serie => this.favoritosDataService.getByMediaIdAndMediaType(serie.id, 'serie'))
-      ))
+    this.seriesDataService.getById(id);
+    this.serie$ = this.seriesDataService.seriesList$.pipe(
+      map(sls => sls.find(s => s.id == id))
     );
-  }
-
-  favoriteStore(data: { rating: number; review: string }) {
-
-    this.serie$.pipe(
-      map(serie => ({
-        mediaId: serie.id,
-        mediaType: 'serie' as 'serie',
-        ...data,
-      }))
-    ).subscribe(nuevoFavorito => {
-      this.favoritosDataService.submitFavorite(nuevoFavorito)
-      this.mostrarPopup = false;
-    });
-
-  }
-
-  showPopUp() {
-    this.favorito$.pipe(take(1)).subscribe(fav => {
-      if (!fav) {
-        this.mostrarPopup = true;
-      } else {
-        this.favoritosDataService.deleteFavorite(fav.id);
-      }
-    });
   }
 }

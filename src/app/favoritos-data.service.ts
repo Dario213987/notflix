@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, forkJoin, map, Observable, of, switchMap} from 'rxjs';
+import {BehaviorSubject, forkJoin, map, Observable, of, switchMap, tap} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../environments/environment';
 import {Movie} from './models/Movie';
@@ -31,33 +31,39 @@ export class FavoritosDataService {
       )
       .subscribe(favoritosConMedia => {
         const ls = this.favoritosListSubject.getValue();
-        this.favoritosListSubject.next([...ls, ...favoritosConMedia]);
+        const nuevos = favoritosConMedia.filter(f => !ls.some(c => c.id == f.id))
+        this.favoritosListSubject.next([...ls, ...nuevos]);
         this.pageNumber++;
       });
   }
 
   initialize(): void {
-    if (this.favoritosListSubject.getValue().length === 0) {
+    if (this.favoritosListSubject.getValue().length < environment.defaultPageSize) {
       this.nextPage();
     }
   }
 
-  getById(id: number): Observable<Favorito | undefined> {
-    return this.http.get<Favorito[]>(`${environment.mockApiBaseUrl}/favoritos?id=${id}`).pipe(
+  getByMediaIdAndMediaType(mediaId: number, mediaType: "serie" | "película"): Observable<Favorito | undefined>{
+   // Para evitar consultas innecesarias al backend
+
+    const favorito = this.favoritosListSubject.getValue()
+      .find(f => f.mediaId === mediaId && f.mediaType === mediaType);
+
+    if (favorito) {
+      return of(favorito);
+    }
+
+    //
+
+    return this.http.get<Favorito[]>(`${environment.mockApiBaseUrl}/favoritos?mediaType=${mediaType}&mediaId=${mediaId}`).pipe(
       map(items => items[0]),
-      switchMap(fav => fav ? this.mapearMediaItem(fav) : of(undefined))
-    );
-  }
-
-  getByMediaIdAndMediaType(mediaId: number, mediaType: "serie" | "película"): Observable<Favorito | undefined> {
-
-    const favorito = this.favoritosListSubject.getValue().find(s => s.mediaId === mediaId && s.mediaType === mediaType);
-
-    if (favorito) return of(favorito);
-
-    return this.http.get<Favorito[]>(`${environment.mockApiBaseUrl}/favoritos?mediaId=${mediaId}&mediaType=${mediaType}`).pipe(
-      map(items => items[0]),
-      switchMap(fav => fav ? this.mapearMediaItem(fav) : of(undefined))
+      switchMap(item => item ? this.mapearMediaItem(item) : of(undefined)),
+      tap(m => {
+        if (m) {
+          const ls = this.favoritosListSubject.getValue();
+          this.favoritosListSubject.next([...ls, m]);
+        }
+      })
     );
   }
 
@@ -75,15 +81,14 @@ export class FavoritosDataService {
     );
   }
 
-  submitFavorite(fav: Omit<Favorito, 'id'>) {
-    this.http.post<Favorito>(`${environment.mockApiBaseUrl}/favoritos`, fav)
-      .pipe(
-        switchMap(favConId => this.mapearMediaItem(favConId))
-      )
-      .subscribe(favCompleto => {
+  submitFavorite(fav: Omit<Favorito, 'id'>): Observable<Favorito> {
+    return this.http.post<Favorito>(`${environment.mockApiBaseUrl}/favoritos`, fav).pipe(
+      switchMap(favConId => this.mapearMediaItem(favConId)),
+      tap(favCompleto => {
         const actual = this.favoritosListSubject.getValue();
         this.favoritosListSubject.next([...actual, favCompleto]);
-      });
+      })
+    );
   }
 
   deleteFavorite(id: number): void {

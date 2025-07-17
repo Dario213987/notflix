@@ -1,5 +1,4 @@
-import {Movie} from './Movie';
-import {Serie} from './Serie';
+import {MediaItem} from './MediaItem';
 
 export interface Favorito {
   id: number,
@@ -7,5 +6,5 @@ export interface Favorito {
   rating: number,
   mediaType: "película" | "serie",
   review: string,
-  mediaItem?: Serie | Movie,
+  mediaItem?: MediaItem,
 }

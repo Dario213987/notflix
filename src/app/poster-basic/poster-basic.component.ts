@@ -15,9 +15,5 @@ export class PosterBasicComponent {
     setTimeout(() => {
       this.loading = false;
     }, environment.minimumSkeletonAnimationTime);
-    }
-
-  onError(){
-    //TODO: poner imagen de error
   }
 }

@@ -15,12 +15,6 @@ export class TabSelectorComponent {
   constructor(private router: Router) {
   }
 
-  goToTab(index: number) {
-    this.selectedTab = index;
-    this.router.navigate([this.routes[index]]);
-  }
-
-
   ngOnInit() {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
