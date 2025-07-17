@@ -48,7 +48,13 @@ export class SeriesDataService {
       tap(s => {
         if (s) {
           const ls = this.seriesListSubject.getValue();
-          this.seriesListSubject.next([...ls, s]);
+          /*
+          * Sin esta line si dos componentes hacen un getById() al mismo tiempo, se pueden generar duplicados en el tiempo que el cliente espera la respuesta.
+          * La solucion ideal seria controlar las requests que se hacen para evitar multiples request del mismo recurso.
+          * */
+          if (!ls.some(serie => serie.id === s.id)) {
+            this.seriesListSubject.next([...ls, s]);
+          }
         }
       })
     );

@@ -42,10 +42,12 @@ export class PeliculasDataService {
     return this.http.get<Movie[]>(`${environment.mockApiBaseUrl}/peliculas?id=${id}`).pipe(
       map(items => items[0]),
       map(item => this.mapMovie(item)),
-      tap(m => {
-        if (m) {
+      tap(s => {
+        if (s) {
           const ls = this.peliculasListSubject.getValue();
-          this.peliculasListSubject.next([...ls, m]);
+          if (!ls.some(serie => serie.id === s.id)) {
+            this.peliculasListSubject.next([...ls, s]);
+          }
         }
       })
     );
