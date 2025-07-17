@@ -2,5 +2,9 @@
   <app-media-details-container [item]="item" [tipo]="'serie'">
     <router-outlet></router-outlet>
   </app-media-details-container>
+} @else {
+  <div class="col-12 w-100 text-center p-5 fw-bold">
+    <p>La página a la que quiere acceder no está disponible.</p>
+  </div>
 }
 

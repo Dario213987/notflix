@@ -1,3 +1,7 @@
 @if (season$ | async; as item) {
   <app-media-details [item]="item"></app-media-details>
+} @else {
+  <div class="col-12 w-100 text-center p-5 fw-bold">
+    <p>La temporada a la que quiere acceder no está disponible.</p>
+  </div>
 }
