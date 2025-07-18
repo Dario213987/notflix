@@ -12,11 +12,20 @@
       max="10"
     />
 
-    @if(form.get('rating')?.invalid && form.get('rating')?.touched){
-      <p class="form-text text-danger">
-        Ingresá una puntuación válida entre 1 y 10.
-      </p>
-    }
+    <div *ngIf="form.get('rating') as rtng">
+      <div *ngIf="rtng.hasError('required') && rtng.touched" class="text-danger">
+        El campo es obligatorio
+      </div>
+      <div *ngIf="rtng.hasError('min')" class="text-danger">
+        El valor mínimo es 1
+      </div>
+      <div *ngIf="rtng.hasError('max')" class="text-danger">
+        El valor máximo es 10
+      </div>
+    </div>
+
+
+
 
   </div>
 
@@ -25,12 +34,17 @@
     <label class="form-label">Reseña:</label>
     <textarea class="form-control" formControlName="review" rows="10"></textarea>
 
-    @if(form.get('review')?.invalid && form.get('review')?.touched){
-      <p class="form-text text-danger">
-        La reseña es obligatoria (máx 1000 caracteres).
-      </p>
+    <div *ngIf="form.get('review') as rvw">
 
-    }
+      <div *ngIf="rvw.hasError('required') && rvw.touched" class="text-danger">
+        El campo es obligatorio
+      </div>
+
+      <div *ngIf="rvw.hasError('maxlength')" class="text-danger">
+        Máximo 1000 caracteres permitidos
+      </div>
+    </div>
+
 
   </div>
 
